@@ -20,4 +20,7 @@ module.exports = class User {
         return this._password;
     }
 
+    async authUser() {
+        return this.repository.authUser(this);
+    }
 }

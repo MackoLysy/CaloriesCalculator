@@ -11,7 +11,7 @@ router.post('/', async function (req, res) {
     var user = new User();
     user.username = "asdasdad";
     user.password = "admin";
-    var result = await userRepo.insertUser(user).catch((e) => {
+    var result = await userRepo.addUser(user).catch((e) => {
         console.log("Zjebalo sie!");
         console.log(e)
         res.sendStatus(200);
@@ -24,6 +24,7 @@ router.post('/', async function (req, res) {
     //     console.log("Zjebalo sie!");
     //     res.sendStatus(200);
     // });
+    res.sendStatus(200);
 });
 
 /**

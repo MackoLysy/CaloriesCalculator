@@ -9,16 +9,21 @@ class UserRepository extends IRepository {
 
     createTable() {
         var sql = "CREATE TABLE IF NOT EXISTS user (id INTEGER PRIMARY KEY AUTOINCREMENT, userName TEXT UNIQUE, password TEXT)";
-        this._run(sql,[]);
+        this._run(sql, []);
     }
 
     async get(sql) {
-        await this._get(sql)
+        return this._get(sql)
     }
 
-    async insertUser(user) {
+    addUser(user) {
         var sql = "INSERT INTO user (userName, password) VALUES (?, ?)";
-        await this._insert(sql,[user.username, user.password]);
+        return this._insert(sql, [user.username, user.password]);
+    }
+
+    authUser(user) {
+        var sql = "SELECT * FROM user WHERE userName = ? AND password = ?";
+        return this._get(sql, [user.username, user.password]);
     }
 }
 
