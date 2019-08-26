@@ -17,13 +17,6 @@ router.post('/', async function (req, res) {
         res.sendStatus(200);
         return;
     });
-    // userRepo.insertUser(user).then((r) => {
-    //     console.log("udalo sie!");
-    //     res.sendStatus(200);
-    // }, (e) => {
-    //     console.log("Zjebalo sie!");
-    //     res.sendStatus(200);
-    // });
     res.sendStatus(200);
 });
 

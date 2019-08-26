@@ -12,9 +12,7 @@ const { body, validationResult } = require('express-validator');
  */
 router.use("/login", body('username').exists(), body('password').exists(), function (req, res, next) {
     var errors = validationResult(req);
-    console.log("Validuje!");
     if (!errors.isEmpty()) {
-        console.log('sa bledy!');
         return res.status(200).json({ errors: errors.array() });
     }
     next();
@@ -28,7 +26,8 @@ router.post("/login", async function (req, res) {
         console.log(e);
     });
     if (userToLogin) {
-        console.log(userToLogin);
+        const token = jwt.sign(userToLogin, process.env.JWTTOKEN);
+        return res.status(201).send({ success: true, user: userToLogin, token });
     }
     else {
         console.log("Nie ma usera!");
