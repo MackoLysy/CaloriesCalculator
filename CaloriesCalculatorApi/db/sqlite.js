@@ -43,9 +43,6 @@ function all(sql, params = []) {
     });
 }
 
-function asdadsdad() {
-
-}
 module.exports = {
     run: runSql,
     get: get,

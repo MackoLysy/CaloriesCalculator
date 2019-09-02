@@ -1,7 +1,7 @@
 const router = require('express').Router();
 var User = require('../models/UserModel');
 
-var UserRepository = require("../Repositories/UserRepository");
+var UserRepository = require("../Repositories/User");
 var userRepo = new UserRepository();
 /**
  * Create User

@@ -1,10 +1,15 @@
-const db = require('../db/sqlite');
+const db = require('../db/Sqlite');
 
 class IRepository {
 
+    constructor(){
+        
+    }
     _run(sql) {
         db.run(sql).then((r) => {
         }, (e) => {
+            console.error("ERROR!");
+            console.log(sql);
             console.log(e);
         });
     }

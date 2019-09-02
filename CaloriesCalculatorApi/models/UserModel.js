@@ -1,4 +1,4 @@
-const UserRepository = require("../Repositories/UserRepository");
+const UserRepository = require("../Repositories/User");
 
 
 module.exports = class User {
@@ -6,7 +6,7 @@ module.exports = class User {
     constructor() {
         this.username = null;
         this.password = null;
-        this.repository = new UserRepository();
+        this.repo = new UserRepository();
     }
 
     set username(val) { this._username = val; }
@@ -21,6 +21,6 @@ module.exports = class User {
     }
 
     async authUser() {
-        return this.repository.authUser(this);
+        return this.repo.authUser(this);
     }
 }
