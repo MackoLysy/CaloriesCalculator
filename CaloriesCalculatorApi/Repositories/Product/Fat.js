@@ -24,6 +24,18 @@ class Fat extends IRepository {
             ")";
         this._run(sql)
     }
+    addFatInfo(value) {
+        var sql = "INSERT INTO " + this.tableName + "(" +
+            "cholesterol, stigmasterol, betaSitosterol, kampesterol, " +
+            "transPolyenoic, transMonoenoic, nasycone, trans, " +
+            "fitosterole, multiNasycone, oneNasycone) VALUES " +
+            "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+        return this._insert(sql, [
+            value.cholesterol, value.stigmasterol, value.betaSitosterol, value.kampesterol,
+            value.transPolyenoic, value.transMonoenoic, value.nacycone, value.trans,
+            value.fitosterole, value.multiNasycone, value.oneNasycone
+        ]);
+    }
 }
 
 module.exports = Fat;

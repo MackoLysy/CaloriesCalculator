@@ -37,6 +37,23 @@ class ProcVitamin extends IRepository {
             ")";
         this._run(sql);
     }
+
+    addVitaminInfo(value) {
+        var sql = "INSERT INTO " + this.tableName + "(" +
+            "vitARAE, vitAIU, vitARET, betaCaroten, alfaCaroten, vitB1, vitB2, niacyn, " +
+            "vitB5, vitB6, vitB9, vitB12, vitC, vitD, vitE, vitK1, folan, folacyna, vitB12Added, " +
+            "betaina, betaTokoferol, luteina, likopen, folionAcid, gammaTokoferol) VALUES(" +
+            "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return this._insert(sql, [
+            value.vitARE, value.vitAUI, value.vitARET, value.betaCaroten,
+            value.alfaCaroten, value.vitB1, value.vitB2, value.niacyn,
+            value.vitB5, value.vitB6, value.vitB9, value.vitB12, 
+            value.vitC, value.vitD, value.vitK1, value.floan, 
+            value.floacyna, value.vitb12Added, value.betaina, value.betaTokoferol,
+            value.luteina, value.likopen, value.folionAcid, value.gammaTokoferol
+        ]);
+
+    }
 }
 
 

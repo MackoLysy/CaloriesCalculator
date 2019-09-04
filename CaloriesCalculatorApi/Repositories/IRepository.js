@@ -5,13 +5,8 @@ class IRepository {
     constructor(){
         
     }
-    _run(sql) {
-        db.run(sql).then((r) => {
-        }, (e) => {
-            console.error("ERROR!");
-            console.log(sql);
-            console.log(e);
-        });
+    async _run(sql) {
+        await db.run(sql);
     }
     async _getAll(sql, params) {
         return await db.all(sql, params);

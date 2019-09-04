@@ -19,8 +19,10 @@ function runSql(sql, params = []) {
 
 function get(sql, params = []) {
     return new Promise((resolve, reject) => {
-        db.get(sql, params, (err, row) => {
+        db.get(sql, [params], (err, row) => {
             if (err) {
+                console.log(params);
+                console.log(sql);
                 console.log(err);
                 reject(err);
             } else {

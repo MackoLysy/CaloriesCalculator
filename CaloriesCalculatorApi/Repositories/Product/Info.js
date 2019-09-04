@@ -29,11 +29,14 @@ class Info extends IRepository {
         this._run(sql);
     }
 
-    insert(aminoData) {
-        
+    addProductInfo(aminoData) {
+        // console.log(aminoData);
         var sql = "INSERT INTO " + this.tableName + " (water, calories, energy, protein," +
-            "fat, dust, carbs, roughage, sugar, saccharose, glucose, fructose, lactose, maltose, galactose, starch)";
-        //this._insert(sql);
+            "fat, dust, carbs, roughage, sugar, saccharose, glucose, fructose, lactose, maltose, galactose, starch) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        return this._insert(sql, [aminoData.water, aminoData.calories, aminoData.energy, aminoData.protein,
+        aminoData.fat, aminoData.dust, aminoData.carbs, aminoData.roughage,
+        aminoData.sugar, aminoData.sacharose, aminoData.glucose, aminoData.fructose,
+        aminoData.lactose, aminoData.maltose, aminoData.galactose, aminoData.starch,]);
     }
 
 }

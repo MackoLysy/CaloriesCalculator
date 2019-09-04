@@ -32,8 +32,21 @@ class Amino extends IRepository {
             ")";
         this._run(sql);
     }
-    insert(aminoData) {
-        
+    addAminoInfo(value) {
+        var sql = "INSERT INTO " + this.tableName +
+            "(asparginAcid, alanina, histydyna, glutaminan, " +
+            "glicynie, hydroksyproline, serynie, proline, " +
+            "arginine, waline, leucynie, izoleucynie, " +
+            "treonine, lizynie, metionina, tyrozyna, " +
+            "fenyloalanine, cystynie, tryptofine) VALUES " +
+            "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        return this._insert(sql, [
+            value.asparginAcid, value.alanina, value.histydyna, value.glutaminan,
+            value.glicynie, value.hydroksyproline, value.serynie, value.proline, 
+            value.arginine, value.waline, value.leucynie, value.izoleucynie,
+            value.teronine, value.lizynie, value.metionina, value.tyrozyna, 
+            value.fenyloalanine, value.cystynie, value.tryptofine
+        ]);
     }
 }
 

@@ -18,7 +18,7 @@ class Product {
     }
 
     addProduct(productToInsert) {
-        this.repo.insert(productToInsert);
+        this.repo.addProduct(productToInsert);
     }
 }
 

@@ -4,11 +4,19 @@ var bodyParser = require('body-parser');
 const UserController = require('./controllers/UserController');
 const AuthController = require('./controllers/AuthControllers');
 const ApiController = require('./controllers/Api');
-const importer = require('./import/importer');
+var importer = require('./import/importer');
+const createTables = require('./utils/createTable');
 const app = express();
 const port = 8080;
 
-importer();
+createTables.then((r) => {
+    console.log('skonczylem dodawac tabele');
+    importer();
+}).catch((e) => { 
+    console.log(e);
+})
+
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/user', UserController);

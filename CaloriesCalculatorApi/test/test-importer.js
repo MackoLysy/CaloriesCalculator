@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 const rewire = require('rewire')
 const userimporter = rewire('../import/importer')
 var getObjectValue = userimporter.__get__('getObjectValue');
+var generateCategoryDependency = userimporter.__get__('generateCategoryDependency')
 
 describe("Importet Test", () => {
     it('getObjectValue g', () => {
@@ -23,5 +24,20 @@ describe("Importet Test", () => {
     it('getObjectValue string', () => {
         var obj = { 'test': 'asdasd' };
         expect(() => getObjectValue(obj)).to.throw();
+    });
+    it('generateCategoryDependency empty', () => {
+        var array = [];
+        expect(() => getObjectValue(obj)).to.throw();
+    });
+    it('generateCategoryDependency one', () => {
+        var array = [];
+        array.push("A");
+        expect(generateCategoryDependency(array)).to.eql([{ name: "A", parent: null }]);
+    });
+    it('generateCategoryDependency multi', () => {
+        var array = [];
+        array.push("A");
+        array.push("B");
+        expect(generateCategoryDependency(array)).to.eql([{ name: "A", parent: null }, { name: "B", parent: "A" }]);
     });
 })

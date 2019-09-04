@@ -1,27 +1,26 @@
 var recursive = require("recursive-readdir");
 var fs = require('fs');
 var Product = require('../models/ProductModel');
-// var Categories = require('../models/');
-var improtData = async function () {
-    recursive("./items/", function (err, files) {
+var Categories = require('../models/CategoryModel');
+
+const improtData = function () {
+    recursive("./items/", async function (err, files) {
         var item = files[0];
         var json = fs.readFileSync(item).toString();
-        insertTodb(json);
-        console.log(files.length);
+        for (let i = 0; i < files.length; i++) {
+            var item = files[i];
+            var json = fs.readFileSync(item).toString();
+            await insertTodb(json);
+        }
     });
-
-    // files.forEach(element => {
-    //     var file = fs.readFileSync(element).toString();
-    //     console.log(file);
-    // });
-
+    console.log("Skonczylem!");
 }
 
-function insertTodb(item) {
+async function insertTodb(item) {
     var itemToInsert = {};
     var json = JSON.parse(item);
     itemToInsert.name = json.name;
-    itemToInsert.categories = json.categories;
+    itemToInsert.categories = generateCategoryDependency(json.categories);;
     itemToInsert.base = getBaseContent(json);
     itemToInsert.vit = getVitContent(json);
     itemToInsert.fat = getFatContent(json);
@@ -29,7 +28,9 @@ function insertTodb(item) {
     itemToInsert.amino = getAminoContent(json);
     itemToInsert.other = getOtherContetn(json);
     var product = new Product();
-    product.addProduct(itemToInsert);
+    var categories = new Categories();
+    await categories.addCategoriesArray(itemToInsert.categories);
+    await product.addProduct(itemToInsert);
 }
 
 function getBaseContent(json) {
@@ -166,6 +167,29 @@ function getObjectValue(item) {
         throw new "Cannot parse value!";
     }
     return value;
+}
+
+function generateCategoryDependency(categories) {
+    var categoriesDependency = [];
+    if (categories.length == 0) {
+        throw "No Categories!";
+    }
+    if (categories.length < 2) {
+        var obj = { name: categories[0], parent: null };
+        categoriesDependency.push(obj);
+        return categoriesDependency;
+    }
+    for (let i = 0; i < categories.length; i++) {
+        const element = categories[i];
+        var parent = null;
+        if (i - 1 >= 0) {
+            parent = categories[i - 1];
+        }
+        var obj = { name: element, parent: parent };
+        categoriesDependency.push(obj);
+
+    }
+    return categoriesDependency;
 }
 
 module.exports = improtData;
