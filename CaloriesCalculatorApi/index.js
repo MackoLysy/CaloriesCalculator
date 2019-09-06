@@ -9,12 +9,12 @@ const createTables = require('./utils/createTable');
 const app = express();
 const port = 8080;
 
-createTables.then((r) => {
-    console.log('skonczylem dodawac tabele');
-    importer();
-}).catch((e) => { 
-    console.log(e);
-})
+// createTables.then((r) => {
+//     console.log('skonczylem dodawac tabele');
+//     importer();
+// }).catch((e) => { 
+//     console.log(e);
+// })
 
 
 app.use(bodyParser.json());
