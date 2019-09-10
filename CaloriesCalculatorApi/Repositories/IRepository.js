@@ -2,8 +2,8 @@ const db = require('../db/Sqlite');
 
 class IRepository {
 
-    constructor(){
-        
+    constructor() {
+
     }
     async _run(sql) {
         await db.run(sql);
@@ -13,8 +13,6 @@ class IRepository {
     }
     async _insert(sql, params) {
         var item = await db.run(sql, params);
-        console.log("item: ");
-        console.log(item);
         return item;
     }
     async _get(sql, params) {

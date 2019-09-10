@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.css'
-import App from './App';
+import './index.css';
 import LoginComponent from './login/LoginComponent';
 import * as serviceWorker from './serviceWorker';
 

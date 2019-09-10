@@ -2,30 +2,29 @@ var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('dev.db');
 
 
-db.on('error', function (err) {
+db.on('error', function(err) {
     console.log(err);
 });
 
 function runSql(sql, params = []) {
     return new Promise((resolve, reject) => {
-        db.run(sql, params, function (err) {
+        db.run(sql, params, function(err) {
             if (err) {
                 reject(err);
             }
-            resolve({id: this.lastID});
+            resolve({ id: this.lastID });
         });
     });
 }
 
 function get(sql, params = []) {
     return new Promise((resolve, reject) => {
-        db.get(sql, [params], (err, row) => {
+        db.get(sql, params, (err, row) => {
             if (err) {
-                console.log(params);
-                console.log(sql);
-                console.log(err);
                 reject(err);
             } else {
+                console.log(params);
+                console.log(row);
                 resolve(row);
             }
         })

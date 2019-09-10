@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 const UserController = require('./controllers/UserController');
 const AuthController = require('./controllers/AuthControllers');
 const ApiController = require('./controllers/Api');
+const cors = require('cors');
 var importer = require('./import/importer');
 const createTables = require('./utils/createTable');
 const app = express();
@@ -16,7 +17,7 @@ const port = 8080;
 //     console.log(e);
 // })
 
-
+app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use('/user', UserController);
